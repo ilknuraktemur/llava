@@ -1,0 +1,8 @@
+numpy
+Flask
+gunicorn
+torch==2.1
+transformers==4.34.1
+accelerate==0.23.0
+bitsandbytes==0.41.1
+llava-torch==1.1.1
