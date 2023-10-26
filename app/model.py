@@ -1,6 +1,6 @@
 
 from flask import Flask
-from app.ai import generator
+from ai import generator
 from flask import request
 
 

@@ -42,7 +42,7 @@ class LLaVa:
                 f"Model is deprecated; Could not load model: {self.model_n}"
             )
             
-    def read_input(self, form: Mapping[str, Any]) -> Tuple[str, int, int, float, float]:
+    def read_input(self, form: Mapping[str, Any]) -> Tuple[str, str]:
         """Read prompt and other arguments from the form."""
 
         prompt = form.get("prompt", None)
@@ -69,8 +69,14 @@ class LLaVa:
         conv.append_message(roles[1],None)
         return conv.get_prompt(),conv
     
-    def ask_image(self,image_path=str, prompt= str):
-        image=self.load_image(image_path)
+    def process_image(self,image):
+        args = {"image_aspect_ratio:" "pad"}
+        image_tensor = process_images([image],self.image_processor, args)
+        return image_tensor.to(self.model.device, dtype=torch.float16)
+    
+    def ask_image(self,form: Mapping[str, Any]) -> Callable: 
+        (prompt,url) = self.read_input(form)
+        image=self.load_image(url)
         image_tensor = self.process_image(image)
         prompt, conv= self.create_prompt(prompt)
         input_ids = (
