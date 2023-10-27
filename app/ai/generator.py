@@ -16,6 +16,7 @@ from llava.model.builder import load_pretrained_model
 from llava.utils import disable_torch_init
 from PIL import Image
 import logging
+from flask import Flask, request, jsonify
 
 disable_torch_init()
 
@@ -98,9 +99,10 @@ class LLaVa:
                 use_cache=True,
                 stopping_criteria=[stopping_criteria],
             )
-            return self.tokenizer.decode(
+            returned=self.tokenizer.decode(
                 output_ids[0, input_ids.shape[1] :], skip_special_tokens=True
             ).strip()
+            return jsonify({'generation':  str(returned) })
     
 print("defining model")
 llava = LLaVa()

@@ -1,8 +1,7 @@
-numpy
-Flask
-gunicorn
-torch==2.1
-transformers==4.34.1
-accelerate==0.23.0
-bitsandbytes==0.41.1
+torch==2.0.1
+transformers==4.31.0
+accelerate==0.21.0
+bitsandbytes==0.41.0
 llava-torch==1.1.1
+flask
+gunicorn
