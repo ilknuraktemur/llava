@@ -1,15 +1,15 @@
 
 from flask import Flask
-from ai import generator
+#from app.ai import generator
 from flask import request
 
 
 app = Flask(__name__)
 
 # Define a route for the API endpoint
-@app.route("/ai/llava", methods=['POST'])
+'''@app.route("/ai/llava", methods=['POST'])
 def stable_diff():
-    return generator.llava.ask_image(request.json)
+    return generator.llava.ask_image(request.json)'''
 
 @app.route("/")
 def stable_diff2():
@@ -17,4 +17,4 @@ def stable_diff2():
 
 # Start the Flask application
 if __name__ == '__main__':
-    app.run(host="0.0.0.0", debug=True) 
+    app.run(host="0.0.0.0") 
